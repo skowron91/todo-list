@@ -1,9 +1,8 @@
 <script >
-// import App from '../App.vue';
+import App from '../App.vue';
 
 export default {
-  name:'TheWelcome',
-  props: ['items'],
+  
 data() {
   return {
     insertedValue: '',
@@ -13,6 +12,7 @@ data() {
 methods: {
   addItem() {
     this.$emit('add-item', this.insertedValue);
+    this.insertedValue = "";
   }
 }
 }
@@ -20,7 +20,7 @@ methods: {
 
 <template>
   <div class="addComponent">
-    <input class="newTask" v-bind="insertedValue">
+    <input class="newTask" v-model="insertedValue">
     <button class="addBtn" type="submit" @click="addItem">Add</button>
   </div>
   
@@ -40,5 +40,6 @@ methods: {
 .addBtn {
   display: inline-block;
 }
+
 
 </style>

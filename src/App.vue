@@ -25,7 +25,7 @@ export default {
   <header>
     <h1 class="appTitle">Todo App</h1>,
     <CreateTask :items="items" @add-item="addItem" />
-    <ul><li v-for="item in items" style="color: blue">{{ item }}</li></ul>
+    <ul><li v-for="item in items" style="color: black">{{ item }}</li></ul>
   </header>
 
 </template>
@@ -37,6 +37,10 @@ header {
   width: 60vw;
   min-height: 60vh;
   
+}
+
+ul li {
+  list-style-type: none;
 }
 
 @media (min-width: 512px) {
