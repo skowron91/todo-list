@@ -16,7 +16,6 @@ export default {
       this.items.push(item)
       console.log(this.items);
     },
-
   }
 }
 </script>
@@ -36,7 +35,6 @@ header {
   line-height: 1.5;
   width: 60vw;
   min-height: 60vh;
-  
 }
 
 ul li {
