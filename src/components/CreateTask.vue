@@ -2,25 +2,32 @@
 import App from '../App.vue';
 
 export default {
-  
+  props: {
+    value: {
+      type: String,
+      required: true,
+    },
+  },
 data() {
   return {
-    insertedValue: '',
+    task: "",
   }
 },
 
 methods: {
   addItem() {
-    this.$emit('add-item', this.insertedValue);
-    this.insertedValue = "";
-  }
+    this.$emit('add-item', this.task);
+    this.task = "";
+  },
+  
 }
 }
 </script>
 
 <template>
   <div class="addComponent">
-    <input class="newTask" v-model="insertedValue">
+    <input class="newTask" 
+      v-model="task" >
     <button class="addBtn" type="submit" @click="addItem">Add</button>
   </div>
   
