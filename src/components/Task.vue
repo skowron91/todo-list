@@ -34,5 +34,6 @@ methods: {
 <style scoped>
 li {
 color: black;
+margin-left: 10%;
 }
 </style>

@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     addItem(item) {
-      this.items.push(item)
+      this.items.push({name:item, editing:false, completed:false})
       console.log(this.items);
     },
 
@@ -28,6 +28,15 @@ export default {
     editItem(index) {
       this.task = this.items[index],
       console.log(this.task);
+    },
+
+    clearAllItems() {
+      this.items = [];
+    },
+
+    completedItems(index) {
+      // this.item['completed'] = item.completed
+      this.items[index].completed = !this.items[index].completed;    
     }
   }
 }
@@ -39,9 +48,19 @@ export default {
     <CreateTask :items="items" @add-item="addItem" :value="this.task"/>
 
     <ul>
-      <Task v-for="(item, index) in items" :key="index" @delete="deleteItem(index)"
-      @edit="editItem(index)">{{ item }}</Task>
+      <Task v-for="(item, index) in items" 
+      :key="index"
+      :class= "{ completed: item.completed}"
+      @delete="deleteItem(index)"
+      @edit="editItem(index)"
+      @click="completedItems(index)"
+      >{{ item.name }}</Task>
     </ul>
+    <div class="clearButtons">
+      <button class="clearBtn">Clear</button>
+      <button class="clearAllBtn" @click="clearAllItems">Clear All</button>
+    </div>
+
   </header>
 
 </template>
@@ -58,6 +77,13 @@ ul li {
   list-style-type: none;
 }
 
+.clearButtons {
+  margin-left: 10%;
+}
+
+.completed {
+  text-decoration: line-through
+}
 @media (min-width: 512px) {
   header {
     display: flex;
