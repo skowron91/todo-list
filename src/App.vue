@@ -15,14 +15,28 @@ export default {
       task:"",
     }
   },
+
+  mounted() {
+    
+    if(localStorage.getItem('items')) {
+      try {
+        this.items = JSON.parse(localStorage.getItem('items'));
+      } catch(e) {
+        localStorage.removeItem('items');
+      }
+    }
+  },
+
   methods: {
     addItem(item) {
       this.items.push({name:item, editing:false, completed:false})
       console.log(this.items);
+      this.saveItems();
     },
 
     deleteItem(index) {
-      this.items.splice(index, 1)
+      this.items.splice(index, 1);
+      this.saveItems();
     },
 
     editItem(index) {
@@ -32,11 +46,21 @@ export default {
 
     clearAllItems() {
       this.items = [];
+      this.saveItems();
+    },
+    
+    clearCompleted() {
+      this.items = this.items.filter(completed);
+      this.saveItems();
     },
 
     completedItems(index) {
-      // this.item['completed'] = item.completed
-      this.items[index].completed = !this.items[index].completed;    
+      this.items[index].completed = !this.items[index].completed;
+    },
+
+    saveItems() {
+      let parsed = JSON.stringify(this.items);
+      localStorage.setItem('items', parsed);
     }
   }
 }
@@ -57,7 +81,8 @@ export default {
       >{{ item.name }}</Task>
     </ul>
     <div class="clearButtons">
-      <button class="clearBtn">Clear</button>
+      <button class="clearBtn" @click="clearAllItems"
+      >Clear Completed</button>
       <button class="clearAllBtn" @click="clearAllItems">Clear All</button>
     </div>
 
