@@ -3,10 +3,7 @@ import App from '../App.vue';
 
 export default {
   props: {
-    value: {
-      type: String,
-      required: true,
-    },
+    items: ['items']
   },
 data() {
   return {
@@ -29,6 +26,7 @@ methods: {
     <input class="newTask" 
       v-model="task" >
     <button class="addBtn" type="submit" @click="addItem">Add</button>
+    
   </div>
   
 </template>

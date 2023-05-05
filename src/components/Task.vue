@@ -18,7 +18,7 @@ methods: {
 
   editItem(index){
     this.$emit('edit', index)
-  }
+  },
 }
 }
 </script>
@@ -26,8 +26,9 @@ methods: {
 <template>
  <li>
   <slot></slot>
-  <button @click="deleteItem(index)">delete</button>
-  <button @click="editItem(index)">edit</button>
+  <div><button @click="deleteItem(index)">delete</button>
+  <button @click="editItem(index)">edit</button></div>
+  
  </li>
 </template>
 
@@ -35,5 +36,8 @@ methods: {
 li {
 color: black;
 margin-left: 10%;
+display: flex;
 }
+
+
 </style>
