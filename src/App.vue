@@ -50,12 +50,13 @@ export default {
     },
     
     clearCompleted() {
-      this.items = this.items.filter(completed);
+      this.items = this.items.filter(item => !item.completed);
       this.saveItems();
     },
 
     completedItems(index) {
       this.items[index].completed = !this.items[index].completed;
+      this.saveItems();
     },
 
     saveItems() {
@@ -80,8 +81,9 @@ export default {
       @click="completedItems(index)"
       >{{ item.name }}</Task>
     </ul>
+    <p v-if="this.items.length === 0">For now you have nothing to do.</p>
     <div class="clearButtons">
-      <button class="clearBtn" @click="clearAllItems"
+      <button class="clearBtn" @click="clearCompleted"
       >Clear Completed</button>
       <button class="clearAllBtn" @click="clearAllItems">Clear All</button>
     </div>
@@ -100,6 +102,11 @@ header {
 
 ul li {
   list-style-type: none;
+}
+
+p {
+  color: black;
+  margin-left: 10%;
 }
 
 .clearButtons {
